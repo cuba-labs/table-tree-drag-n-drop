@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.sales.web.customer.CustomerBrowse"
+        focusComponent="customersTable"
+        lookupComponent="customersTable"
+        messagesPack="com.company.sales.web.customer">
+    <dsContext>
+        <collectionDatasource id="customersDs"
+                              class="com.company.sales.entity.Customer"
+                              view="_local">
+            <query>
+                <![CDATA[select e from sales$Customer e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="mainBox"
+            spacing="true">
+        <filter id="filter"
+                applyTo="customersTable"
+                datasource="customersDs">
+            <properties include=".*"/>
+        </filter>
+        <split id="mainBox"
+               orientation="horizontal"
+               pos="200px"
+               settingsEnabled="false"
+               width="100%">
+            <vbox height="100%"
+                  margin="false,true,false,false"
+                  width="100%">
+                <tree id="gradeTree"
+                      height="100%"
+                      width="100%"/>
+            </vbox>
+            <vbox height="100%"
+                  margin="false,false,false,true"
+                  width="100%">
+                <table id="customersTable"
+                       height="100%"
+                       multiselect="true"
+                       width="100%">
+                    <columns>
+                        <column id="name"/>
+                        <column id="email"/>
+                        <column id="grade"/>
+                    </columns>
+                    <rows datasource="customersDs"/>
+                </table>
+            </vbox>
+        </split>
+    </layout>
+</window>
